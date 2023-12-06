@@ -1,0 +1,1 @@
+print(distances_from_push, millisecond_push)
