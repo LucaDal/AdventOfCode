@@ -7,7 +7,6 @@ times = [int(''.join(times[:]))]
 distances = list(re.findall(r"\d+", lines[1]))
 distances = [int(''.join(distances[:]))]
 
-print(times,distances)
 ways_to_win = []
 for time, distance in zip(times,distances):
     counter : int = 0

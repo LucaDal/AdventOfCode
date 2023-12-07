@@ -13,6 +13,7 @@ def get_overlap(source, map, target):
 
 with open('input.txt', 'r') as f:
     lines = f.read().splitlines()
+
 next_intervals = [int(seed) for seed in lines[0][7:].split()]
 next_intervals = [(next_intervals[i], next_intervals[i] + next_intervals[i + 1] - 1) for i in range(0, len(next_intervals), 2)]
 intervals = []
@@ -20,7 +21,7 @@ for line in lines[1:]:
     if line:
         if not line.endswith(':'):
             map = [int(val) for val in line.split()]
-            map = [(map[1], map[1] + map[2] - 1), (map[0], map[0] + map[2] - 1)]
+            map = [(map[1], map[1] + map[2] - 1), (map[0], map[0] + map[2] - 1)] #(source,source+range),(dest,dest+range)
             remaining_intervals = []
             while intervals:
                 interval = intervals.pop(0)
