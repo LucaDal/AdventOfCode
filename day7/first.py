@@ -11,7 +11,6 @@ def sort(winning_lsit):
         for index in range(len_new_list-1): 
             flag = False 
             for index_comparing in range(len_new_list-1):
-
                 if index_comparing != index:
                     char_index = 0
                     while cards.index(sorting_list[index_comparing][0][char_index]) == cards.index(sorting_list[index_comparing+1][0][char_index]) and char_index < 4:
@@ -21,6 +20,7 @@ def sort(winning_lsit):
                         flag = True
             if not flag:
                 break
+        final_list.extend(sorting_list)
     return final_list
 
 
@@ -57,10 +57,8 @@ winning_list = []
 for line in lines:
     values = line.split()
     value_hand = get_hand_points(values[0])
-    winning_list.append((values, value_hand))
+    winning_list.append(([values[0],values[1]], value_hand))
 
 winning_list.sort(key= lambda x : x[1])
 winning_list = sort(winning_list)
-for val in winning_list:
-    print(val)
 print(sum(int(i[1])*index for i,index in zip(winning_list,range(1,len(winning_list)+1))))

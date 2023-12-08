@@ -21,34 +21,23 @@ def sort(winning_lsit):
                         flag = True
             if not flag:
                 break
+        final_list.extend(sorting_list)
     return final_list
 
 
-def highr_card(hand):
-
+def highr_hand(hand :str):
     if hand.count('J') == 0:
         return hand
-    type = get_hand_points(hand)
-    if type == 0:
-        #prendo il valore pìu alto
-        pass
-    if type == 1:
-        #rendo le j di quel tipo
-        pass
-    if type == 2:
-        pass
-    if type == 3:
-        pass
-    if type == 4:
-        pass
-    if type == 5:
-        #le rendo un full
-        pass
-    if type == 6:
-        #le rendo tutte col valore massimo
-        pass
-    
-
+    points = 0
+    best_card = ''
+    for card in cards:
+        temp_points = get_hand_points(hand.replace('J',card))
+        if temp_points > points:
+            points = temp_points
+            best_card = card
+    if points == 0:
+        return hand.replace('J','A')
+    return hand.replace('J',best_card)
 def get_hand_points(hand):
     Three_of_a_kind = False
     one_pair = False
@@ -81,11 +70,9 @@ with open('input.txt', 'r') as f:
 winning_list = []
 for line in lines:
     values = line.split()
-    hand = get_hand_points(values[0])
-    value_hand = get_hand_points(hand)
-    winning_list.append(([hand,values[1]], value_hand))
+    hand = highr_hand(values[0])
+    winning_list.append(([values[0],values[1]], get_hand_points(hand)))
 
 winning_list.sort(key= lambda x : x[1])
 winning_list = sort(winning_list)
-
 print(sum(int(i[1])*index for i,index in zip(winning_list,range(1,len(winning_list)+1))))
